@@ -1,49 +1,20 @@
-// enum WebEvent {
-//     //An enum variant can be like a unit struct without fields or data type
-//     WELoad,
-//     //An enum variant can be like a tuple struct with data types no named fields
-//     WEKeys(String, char),
-//     //An enum variant can be like a classic struct with named fields and their types
-//     WEClick { x: i64, y: i64 },
-// }
-
-//Define a tuple struct
-#[derive(Debug)]
-struct KeyPress(String, char);
-
-//Define a classic struct
-#[derive(Debug)]
-struct MouseClick {
-    x: i64,
-    y: i64,
-}
-
-//Redefine the enum variants to use the data from the new structs
-//Update the page Load variant to have boolean type
-#[derive(Debug)]
-enum WebEvent { WELoad(bool), WEClick(MouseClick), WEKeys(KeyPress) }
-
 fn main() {
+    let formal = "Formal: Goodbye.";
+    let casual = "Casual: See you later!";
+    goodbye(formal);
+    goodbye(casual);
 
-    //Instantiate a MouseClick struct and bind the coordinate value
-    let click = MouseClick { x: 100, y: 250 };
-    println!("Mouse click location: {}, {}", click.x, click.y);
-
-    //Instantiate a KeyPress tuple and bind the key value
-    let keys = KeyPress(String::from("Ctrl+"), 'N');
-    println!("\nKeys pressed: {}{}", keys.0, keys.1);
-
-    //Instantiate WebEvent enum variants
-    //Set the boolean page Load value to true
-    let we_load = WebEvent::WELoad(true);
-    //Set the WEClick variant to use the dta in the click struct
-    let we_click = WebEvent::WEClick(click);
-    //Set the WEKeys variant to use the data in the keys tuple
-    let we_key = WebEvent::WEKeys(keys);
-
-    //Print the values in the WebEvent enum variants
-    //Use the{:#?} syntax to display the enum structure and data in readable form
-    println!("\nWebEvent enum structure: \n\n {:#?} \n\n{:#?} \n\n {:#?}", we_load, we_click, we_key)
+    let num = 25;
+    println!("\n{} divide by 5 = {}", num, divide_by_5(num))
 }
 
+fn goodbye(message: &str) {
+    println!("\n{}", message);
+}
 
+fn divide_by_5(num: u32) -> u32 {
+    if num == 0 {
+        return 0;
+    }
+    num / 5
+}
