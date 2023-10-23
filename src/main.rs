@@ -1,20 +1,43 @@
-fn main() {
-    let formal = "Formal: Goodbye.";
-    let casual = "Casual: See you later!";
-    goodbye(formal);
-    goodbye(casual);
-
-    let num = 25;
-    println!("\n{} divide by 5 = {}", num, divide_by_5(num))
+// Declare Car struct to describe vehicle with named fields
+struct Car {
+    color: String,
+    transmission: Transmission,
+    convertible: bool,
+    mileage: u32,
 }
 
-fn goodbye(message: &str) {
-    println!("\n{}", message);
+#[derive(PartialEq, Debug)]
+// Declare enum for car transmission type
+enum Transmission {
+    Manual,
+    SemiAuto,
+    Automatic,
 }
 
-fn divide_by_5(num: u32) -> u32 {
-    if num == 0 {
-        return 0;
+// Build a "Car" by using values from the input arguments
+// - Color of car (String)
+// - Transmission type (enum value)
+// - Convertible (boolean, true if car is convertible)
+// All new cars always have zero mileage
+fn car_factory(color: String, transmission: Transmission, convertible: bool) -> Car {
+    Car {
+        color,
+        transmission,
+        convertible,
+        mileage: 0,
     }
-    num / 5
+}
+
+fn main() {
+    // We have orders for three new cars!
+    // We`ll declare a mutable car variable and reuse it for 3 cars
+
+    let mut car = car_factory(String::from("Red"), Transmission::Manual, false);
+    println!("Car 1 = {}, {:?} transmission, convertible: {}, mileage: {}", car.color, car.transmission, car.convertible, car.mileage);
+
+    car = car_factory(String::from("Silver"), Transmission::Automatic, true);
+    println!("Car 2 = {}, {:?} transmission, convertible: {}, mileage: {}", car.color, car.transmission, car.convertible, car.mileage);
+
+    car = car_factory(String::from("Yellow"), Transmission::SemiAuto, false);
+    println!("Car 3 = {}, {:?} transmission, convertible: {}, mileage: {}", car.color, car.transmission, car.convertible, car.mileage);
 }
