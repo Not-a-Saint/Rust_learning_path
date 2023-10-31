@@ -1,43 +1,33 @@
-// Declare Car struct to describe vehicle with named fields
-struct Car {
-    color: String,
-    transmission: Transmission,
-    convertible: bool,
-    mileage: u32,
+use crate::triangle::Triangle;
+
+mod triangle;
+
+#[derive(Debug)]
+struct Person {
+    name: String,
+    surname: String,
+    age: i32,
+    balance: f64,
 }
 
-#[derive(PartialEq, Debug)]
-// Declare enum for car transmission type
-enum Transmission {
-    Manual,
-    SemiAuto,
-    Automatic,
-}
-
-// Build a "Car" by using values from the input arguments
-// - Color of car (String)
-// - Transmission type (enum value)
-// - Convertible (boolean, true if car is convertible)
-// All new cars always have zero mileage
-fn car_factory(color: String, transmission: Transmission, convertible: bool) -> Car {
-    Car {
-        color,
-        transmission,
-        convertible,
-        mileage: 0,
-    }
-}
 
 fn main() {
-    // We have orders for three new cars!
-    // We`ll declare a mutable car variable and reuse it for 3 cars
+    // let tr1 = Triangle {
+    //     cat1: 6.0,
+    //     cat2: 8.0,
+    // };
 
-    let mut car = car_factory(String::from("Red"), Transmission::Manual, false);
-    println!("Car 1 = {}, {:?} transmission, convertible: {}, mileage: {}", car.color, car.transmission, car.convertible, car.mileage);
+    // let hyp = tr1.find_hyp();
+    // println!("{hyp}");
+    // let area = tr1.find_area();
+    // println!("{area}");
 
-    car = car_factory(String::from("Silver"), Transmission::Automatic, true);
-    println!("Car 2 = {}, {:?} transmission, convertible: {}, mileage: {}", car.color, car.transmission, car.convertible, car.mileage);
+    let isc_tr = Triangle::create_isc(5.0);
+    println!("{:?}", isc_tr);
 
-    car = car_factory(String::from("Yellow"), Transmission::SemiAuto, false);
-    println!("Car 3 = {}, {:?} transmission, convertible: {}, mileage: {}", car.color, car.transmission, car.convertible, car.mileage);
+    let hyp = isc_tr.find_hyp();
+
+    let area = isc_tr.find_area();
+
+    println!("{hyp} {area}")
 }
